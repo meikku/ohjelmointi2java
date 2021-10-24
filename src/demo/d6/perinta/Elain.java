@@ -1,4 +1,5 @@
-package d6.perinta;
+package demo.d6.perinta;
+
 /**
  * Elain-luokka.  Kantaluokka eläimille.
  * @author Vesa Lappalainen

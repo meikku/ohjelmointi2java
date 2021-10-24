@@ -9,14 +9,14 @@ import fi.jyu.mit.ohj2.*;
  */
 public class Astia {
     private String nimi;
-    private int tilavuus;
-    private int maara;
+    public double tilavuus;
+    private double maara;
 
     /**
      * @param nimi mikä astia
      * @param tilavuus on astian tilavuus
      */
-    public Astia(String nimi, int tilavuus) {
+    public Astia(String nimi, double tilavuus) {
         this.nimi = nimi;
         this.tilavuus = tilavuus;
         this.maara = 0;
@@ -27,7 +27,7 @@ public class Astia {
      * täyttää astian täyteen vedellä
      * @return TODO
      */
-    public int tayta() {
+    public double tayta() {
         this.maara = this.tilavuus;
         return maara;
     }
@@ -44,9 +44,11 @@ public class Astia {
         for (int i = 1; i<astiat.length; i++) {
             System.out.print(ja + astiat[i].getTilavuus());
             ja = " sekä ";
-            System.out.print(" litran astiat ja "
-                    + "ämpäri (" + astiat[0].getTilavuus() +" l)");
         }
+        System.out.print(" litran astiat ja "
+   
+                 + "ämpäri (" + astiat[0].getTilavuus() +" l). ");
+   
         
         
     }
@@ -81,7 +83,7 @@ public class Astia {
     /**
      * @return tilavuus
      */
-    public int getTilavuus() {
+    public double getTilavuus() {
         return this.tilavuus;
     }
 
@@ -89,7 +91,7 @@ public class Astia {
     /**
      * @return maara
      */
-    public int getMaara() {
+    public double getMaara() {
         return this.maara;
     }
 
@@ -107,7 +109,7 @@ public class Astia {
         System.out.println("Tunnetaan nimet: ");
         for (int i = 0; i <astiat.length; i++) {
             System.out.println(astiat[i].getNimi() + " ");
-            System.out.println("");
+        System.out.println("");
         }
     }
 
@@ -117,7 +119,7 @@ public class Astia {
      * 
      */
     public void kaada(Astia astia) {
-        int tilaa = astia.getTilavuus() - astia.getMaara();
+        double tilaa = astia.getTilavuus() - astia.getMaara();
         if (this.maara >= tilaa) {
            this.maara = this.maara - tilaa;
            astia.maara = astia.tilavuus;
@@ -144,7 +146,7 @@ public class Astia {
             for (int i = 1; i < astiat.length; i++)
                 System.out.println(
                         astiat[i].getTilavuus() + " litran astiassa on "
-                                + astiat[i].getMaara() + " litraa nestettä");
+                                + astiat[i].getMaara() + " litraa nestettä.");
             String rivi = Syotto.kysy("Mistä kaadetaan ja mihin");
             if (rivi.length() == 0)
                 break;

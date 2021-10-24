@@ -1,8 +1,6 @@
 package demo.d6;
 
-
 import fi.jyu.mit.ohj2.*;
-
 
 /**
  * Alustava luokka päivämäärää varten
@@ -11,13 +9,43 @@ import fi.jyu.mit.ohj2.*;
  * @version 1.1, 14.02.2003
  * @version 1.2, 17.02.2003
  * @version 1.3, 11.02.2008
+ * @example
+     * <pre name="test">
+     *   Pvm pvm = new Pvm(20,2,2012);
+     *   pvm.alusta(1,3,0);     pvm.toString() === "1.3.2012";
+     *   pvm.alusta(2,13,2012); pvm.toString() === "1.3.2012";
+     *   pvm.alusta(28,2,2012); pvm.toString() === "28.2.2012";
+     *   pvm.alusta(29,2,2011); pvm.toString() === "28.2.2012";
+     *   pvm.alusta(29,2,2012); pvm.toString() === "29.2.2012";
+     *   pvm.alusta(31,3,2012); pvm.toString() === "31.3.2012";
+     *   pvm.alusta(31,4,2012); pvm.toString() === "31.3.2012";
+     *   pvm.alusta( 0,2,2012); pvm.toString() === "31.3.2012";
+     * </pre>
+
+     * @example
+     * <pre name="test">
+     *  Pvm pv1 = new Pvm(15,6,2013);
+     *  Pvm pv2 = new Pvm(14,5,2014);
+     *  Pvm pv3 = new Pvm(15,7,2014);
+     *  Pvm pv4 = new Pvm(16,7,2014);
+     *  Pvm pv5 = new Pvm(16,7,2014);
+     *  Pvm pv6 = new Pvm(16,7,2012);
+     *  Pvm.compareTo(pv1,pv2) === -1;  // ero vuodessa
+     *  Pvm.compareTo(pv2,pv1) ===  1;
+     *  Pvm.compareTo(pv2,pv3) === -1;  // ero kuukaudessa
+     *  Pvm.compareTo(pv3,pv2) ===  1;
+     *  Pvm.compareTo(pv3,pv4) === -1;  // ero päivässä
+     *  Pvm.compareTo(pv4,pv3) ===  1;
+     *  Pvm.compareTo(pv4,pv5) ===  0;  // kaikki samoja
+     *  Pvm.compareTo(pv6,pv2) === -1;  // ero kuukaudessa, mutta vuodessa toisinpäin
+     *  Pvm.compareTo(pv2,pv6) ===  1;
+     * </pre>
  */
 public class Pvm {
 
     private int pv;
     private int kk;
     private int vv;
-
 
     /**
      *  Muuttaa päivämäärän nykypäivälle.
@@ -39,11 +67,16 @@ public class Pvm {
      * @param ivv vuoden alustus
      */
     public void alusta(int ipv, int ikk, int ivv) {
-        if ( ipv > 0 ) this.pv = ipv;
-        if ( ikk > 0 ) this.kk = ikk;
-        if ( ivv > 0 ) this.vv = ivv;
-        if ( this.vv < 50 ) this.vv += 2000;
-        if ( this.vv < 100 ) this.vv += 1900;
+        if (ipv > 0)
+            this.pv = ipv;
+        if (ikk > 0)
+            this.kk = ikk;
+        if (ivv > 0)
+            this.vv = ivv;
+        if (this.vv < 50)
+            this.vv += 2000;
+        if (this.vv < 100)
+            this.vv += 1900;
     }
 
 
@@ -81,7 +114,7 @@ public class Pvm {
     public Pvm(int pv, int kk, int vv) {
         paivays();
         alusta(pv, kk, vv);
-    } 
+    }
 
 
     /**
@@ -91,8 +124,9 @@ public class Pvm {
     public Pvm(String s) {
         paivays();
         pvmParse(s);
-    } 
-    
+    }
+
+
     /**
      * Verrataan kumpi annetuista päivämääristä on suurempi
      * @param pv1 ensimmäinen päivämäärä
@@ -112,16 +146,24 @@ public class Pvm {
      * 
      */
     public static int compareTo(Pvm pv1, Pvm pv2) {
-        if (pv1.getVv() > pv2.getVv()) return 1;
-        else if (pv1.getVv() < pv2.getVv()) return -1;
-        else if (pv1.getVv() > pv2.getVv()) return 1;
-        else if (pv1.getKk() < pv2.getKk()) return -1;
-        else if (pv1.getKk() > pv2.getKk()) return 1;
-        else if (pv1.getPv() < pv2.getPv()) return -1;   
-        else if (pv1.getPv() > pv2.getPv()) return 1;
+        if (pv1.getVv() > pv2.getVv())
+            return 1;
+        else if (pv1.getVv() < pv2.getVv())
+            return -1;
+        else if (pv1.getVv() > pv2.getVv())
+            return 1;
+        else if (pv1.getKk() < pv2.getKk())
+            return -1;
+        else if (pv1.getKk() > pv2.getKk())
+            return 1;
+        else if (pv1.getPv() < pv2.getPv())
+            return -1;
+        else if (pv1.getPv() > pv2.getPv())
+            return 1;
         return 0;
     }
-    
+
+
     /**
      * Verrataan onko annettu päivämäärä suurempi kuin olion oma päivämäärä
      * @param pv1 päivämäärä johon verrataan
@@ -138,15 +180,22 @@ public class Pvm {
      * </pre>
      */
     public int compareTo(Pvm pv1) {
-        if (this.vv > pv1.getVv()) return 1;
-        else if (this.vv < pv1.getVv()) return -1;
-        else if (this.kk < pv1.getKk()) return -1;
-        else if (this.kk > pv1.getKk()) return 1;
-        else if (this.pv < pv1.getPv()) return -1;   
-        else if (this.pv > pv1.getPv()) return 1;
+        if (this.vv > pv1.getVv())
+            return 1;
+        else if (this.vv < pv1.getVv())
+            return -1;
+        else if (this.kk < pv1.getKk())
+            return -1;
+        else if (this.kk > pv1.getKk())
+            return 1;
+        else if (this.pv < pv1.getPv())
+            return -1;
+        else if (this.pv > pv1.getPv())
+            return 1;
         return 0;
     }
-    
+
+
     /**
      * verrataan onko annettu päivämäärä sama kuin olion oma
      * @param pv1 päivämäärä johon verrataan 
@@ -202,7 +251,8 @@ public class Pvm {
         int k = Mjonot.erota(sb, '.', 0);
         int v = Mjonot.erota(sb, ' ', 0);
         alusta(p, k, v);
-        // tai alusta(Mjonot.erota(sb,'.',0),Mjonot.erota(sb,'.',0),Mjonot.erota(sb,'.',0));
+        // tai
+        // alusta(Mjonot.erota(sb,'.',0),Mjonot.erota(sb,'.',0),Mjonot.erota(sb,'.',0));
     }
 
 
@@ -255,8 +305,8 @@ public class Pvm {
         pvmParse(sb);
     }
 
-
     // Lisätty saantimetodit:
+
 
     /**
      * @return päivän arvo
