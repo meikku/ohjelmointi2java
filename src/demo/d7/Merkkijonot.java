@@ -3,8 +3,6 @@
  */
 package demo.d7;
 
-import java.util.regex.Pattern;
-
 /**
  * @author meikk
  * @version 23.10.2021
@@ -126,17 +124,31 @@ public class Merkkijonot {
      */
     public static boolean onkoSama(String a, String b) {
         String eka = a.trim().toLowerCase();
-        String[] ekaJono = eka.split("\\*"); 
         String toka = b.trim().toLowerCase();
-        System.out.println("eka:" + eka + " ja toka: " + toka);
+        /**
+         *  Vesan esimerkki:
+         *  b = b.replaceAll("\\.","\\\\.");
+         *  b = b.replaceAll("\\*", ".*");
+         *  return a.matches(b);
+         */
+        
+        String[] ekaJono = eka.split("\\*");  
+        
         
         if (toka.contains(ekaJono[0])) return true;
-        //if ((Pattern.matches(toka, eka)) || (Pattern.matches(eka, toka))) return true;
-        // if (toka.regionMatches(true, 0, eka, 0, eka.length() -1)) return true;
+
         return false;
     }
     
     
+    /**
+     * Vesan esimerkki:
+     * paljonkoMerkkejä(String a, String merkit)
+     * Pattern maski = Pattern.compile("[" + merkit + "]");
+     * for (int i = 0; i < a.length(); i++) {
+     *  Matcher merkki = maski.matcher("" + jono.charAt(i));
+     *  if (merkki.matches()) count++;
+     */
     /**
      * 
      * @param a merkkijono jota tutkitaan
@@ -146,6 +158,7 @@ public class Merkkijonot {
      * paljonkoMerkkeja("Kissa istuu puussa") === 14;
      * </pre>
      */
+    
     public static int paljonkoMerkkeja(String a) {
         int count = 0;
         char[] merkit = {'a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'r','s','t','u','v','w'};
@@ -157,6 +170,9 @@ public class Merkkijonot {
         }
             return count;
     }
+    
+    
+    
     /**
      * Selvitetään onko annettu merkkijono palindromi
      * @param a merkkijono jota tutkitaan

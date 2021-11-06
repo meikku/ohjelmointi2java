@@ -22,10 +22,12 @@ public class Taulukot {
     * <pre name="test">
     * double[] pisteet = { 19,18,19.5,18,20 };
     * paras(pisteet) ~~~ 20.0;
+    * double[] tuomarit2 = { 0.0, -103.5, 300.5, -605.5, 896.5, 199.5 };
+    * paras(tuomarit2) ~~~ 896.5;
     * </pre>
     */
     public static double paras(double[] pisteet) {
-        double paras = 0;
+        double paras = - Double.MAX_VALUE; // mieluummin -Double.MAX_VALUE;
         for (int i = 0; i < pisteet.length; i++) {
             if (pisteet[i] > paras)
                 paras = pisteet[i];
@@ -42,10 +44,12 @@ public class Taulukot {
     * <pre name="test">
     * double[] pisteet = { 19,18,19.5,18,20 };
     * huonoin(pisteet) ~~~ 18.0;
+    * double[] tuomarit2 = { 0.0, -103.5, 300.5, -605.5, 896.5, 199.5 };
+    * huonoin(tuomarit2) ~~~ -605.5;
     * </pre>
     */
     public static double huonoin(double[] pisteet) {
-        double alin = 20.0;
+        double alin = Double.MAX_VALUE; // Double MAX_VALUE
         for (int i = 0; i < pisteet.length; i++) {
             if (pisteet[i] < alin)
                 alin = pisteet[i];
@@ -62,6 +66,12 @@ public class Taulukot {
     * <pre name="test">
     * double[] pisteet = { 19,18,19.5,18,20 };
     * summa(pisteet) ~~~ 94.5;
+    * double[] tuomarit2 = { 0.0, -103.5, 300.5, -605.5, 896.5, 199.5 };
+    * summa(tuomarit2) ~~~ 687.5;
+    * double[] pisteet2 = { 2, 4, 6, 8, 10, 200};
+    * summa(pisteet2) ~~~ 230;
+    * double[] pisteet3 = { -1 ,  -2, -3, -4,  -11, 0 };
+    * summa(pisteet3) ~~~ -21;
     * </pre>
     */
     public static double summa(double[] pisteet) {
@@ -81,9 +91,12 @@ public class Taulukot {
     * <pre name="test">
     * double[] pisteet = { 19,18,19.5,18,20 };
     * summaHuonoinJaParasPois(pisteet) ~~~  56.5;
+    * double[] tuomarit2 = { 0.0, -103.5, 300.5, -605.5, 896.5, 199.5 };
+    * summaHuonoinJaParasPois(tuomarit2) ~~~ 396.5;
     * </pre>
     */
     public static double summaHuonoinJaParasPois(double[] pisteet) {
+        if (pisteet.length < 3) return 0;
         double summa = summa(pisteet);
         double paras = paras(pisteet);
         double huonoin = huonoin(pisteet);
